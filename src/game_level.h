@@ -9,7 +9,7 @@ public:
     std::vector<GameObject> m_Bricks;
 
     GameLevel() {};
-    void Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight);
+    void Load(const GLchar *DATA, GLuint levelWidth, GLuint levelHeight);
     void Draw(Renderer &renderer);
     GLboolean IsCompleted();
 private:

@@ -1,6 +1,7 @@
 #include "game.h"
 #include "res_mgr.h"
 #include "render.h"
+#include "resource.h"
 
 
 Game::Game(GLuint width, GLuint height):
@@ -15,8 +16,8 @@ Game::~Game(){
 
 void Game::Init(){
     // 加载着色器
-    ResMgr::LoadShader("res/shaders/shader.vert", "res/shaders/shader.frag", nullptr, "shader");
-    ResMgr::LoadShader("res/shaders/particle.vert", "res/shaders/particle.frag", nullptr, "particle");
+    ResMgr::LoadShader((GLchar*)SHADER_VERT__DATA, (GLchar*)SHADER_FRAG__DATA, nullptr, "shader");
+    ResMgr::LoadShader((GLchar*)PARTICLE_VERT__DATA, (GLchar*)PARTICLE_FRAG__DATA, nullptr, "particle");
 
     // 配置着色器
     glm::mat4 projection = glm::ortho(
@@ -31,18 +32,18 @@ void Game::Init(){
     // 设置渲染器
     m_Renderer = new Renderer(ResMgr::GetShader("shader"));
     // 加载纹理
-    ResMgr::LoadTexture("res/textures/player.png", GL_TRUE, "player");
-    ResMgr::LoadTexture("res/textures/ball.png", GL_TRUE, "ball");
-    ResMgr::LoadTexture("res/textures/particle.png", GL_TRUE, "particle");
-    ResMgr::LoadTexture("res/textures/background.jpg", GL_FALSE, "background");
-    ResMgr::LoadTexture("res/textures/block.png", GL_FALSE, "block");
-    ResMgr::LoadTexture("res/textures/block_solid.png", GL_FALSE, "block_solid");
+    ResMgr::LoadTexture((GLchar*)PLAYER_PNG__DATA, static_cast<int>(PLAYER_PNG__SIZE), GL_TRUE, "player");
+    ResMgr::LoadTexture((GLchar*)BALL_PNG__DATA, static_cast<int>(BALL_PNG__SIZE), GL_TRUE, "ball");
+    ResMgr::LoadTexture((GLchar*)PARTICLE_PNG__DATA, static_cast<int>(PARTICLE_PNG__SIZE), GL_TRUE, "particle");
+    ResMgr::LoadTexture((GLchar*)BACKGROUND_JPG__DATA, static_cast<int>(BACKGROUND_JPG__SIZE), GL_FALSE, "background");
+    ResMgr::LoadTexture((GLchar*)BLOCK_PNG__DATA, static_cast<int>(BLOCK_PNG__SIZE), GL_FALSE, "block");
+    ResMgr::LoadTexture((GLchar*)BLOCK_SOLID_PNG__DATA, static_cast<int>(BLOCK_SOLID_PNG__SIZE), GL_FALSE, "block_solid");
 
     // 加载关卡
-    GameLevel lvl_1; lvl_1.Load("res/levels/level_1", m_Width, m_Height * 0.5);
-    GameLevel lvl_2; lvl_2.Load("res/levels/level_2", m_Width, m_Height * 0.5);
-    GameLevel lvl_3; lvl_3.Load("res/levels/level_3", m_Width, m_Height * 0.5);
-    GameLevel lvl_4; lvl_4.Load("res/levels/level_4", m_Width, m_Height * 0.5);
+    GameLevel lvl_1; lvl_1.Load((GLchar*)LEVEL_1__DATA, m_Width, m_Height * 0.5);
+    GameLevel lvl_2; lvl_2.Load((GLchar*)LEVEL_2__DATA, m_Width, m_Height * 0.5);
+    GameLevel lvl_3; lvl_3.Load((GLchar*)LEVEL_3__DATA, m_Width, m_Height * 0.5);
+    GameLevel lvl_4; lvl_4.Load((GLchar*)LEVEL_4__DATA, m_Width, m_Height * 0.5);
 
     m_Levels.push_back(lvl_1);
     m_Levels.push_back(lvl_2);

@@ -4,28 +4,27 @@
 #include "game_level.h"
 #include "res_mgr.h"
 
-void GameLevel::Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight) {
+void GameLevel::Load(const GLchar *DATA, GLuint levelWidth, GLuint levelHeight) {
     // clear old data
     m_Bricks.clear();
     // load from file
     GLuint tileCode;
     GameLevel level;
     std::string line;
-    std::ifstream input(file);
+    std::stringstream input;
     std::vector<std::vector<GLuint>> tileData;
 
-    if(input){
-        while(std::getline(input, line)){
-            std::istringstream inputStream(line);
-            std::vector<GLuint> row;
-            while(inputStream >> tileCode){
-                row.push_back(tileCode);
-            }
-            tileData.push_back(row);
+    input << DATA;
+    while(std::getline(input, line)){
+        std::istringstream inputStream(line);
+        std::vector<GLuint> row;
+        while(inputStream >> tileCode){
+            row.push_back(tileCode);
         }
-        if(tileData.size() > 0){
-            init(tileData, levelWidth, levelHeight);
-        }
+        tileData.push_back(row);
+    }
+    if(tileData.size() > 0){
+        init(tileData, levelWidth, levelHeight);
     }
 }
 

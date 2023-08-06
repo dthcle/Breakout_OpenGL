@@ -37,13 +37,13 @@ public:
     // 游戏状态
     GameState              m_State;
     GLboolean              m_Keys[1024];
-    GLuint   m_Width, m_Height;
+    GLuint                 m_Width, m_Height;
     std::vector<GameLevel> m_Levels;
     GLuint                 m_Level;
-    GameObject *m_Player;
-    BallObject *m_Ball;
-    ParticleGenerator *m_PG;
-    Renderer *m_Renderer;
+    GameObject             *m_Player;
+    BallObject             *m_Ball;
+    ParticleGenerator      *m_PG;
+    Renderer               *m_Renderer;
 
     // 构造/析构
     Game(GLuint width, GLuint height);
